@@ -106,5 +106,5 @@ kgtml
 
 
 setwd("//cdc.gov/project/CCID_NCIRD_DVD_PPLB/_PMDDL/Everardo/EnvironmentalSureveillance")
-ggsave("k_script_envs_gtm.png", dpi = 500, height = 6, width = 8 , units = "in")
+ggsave("k_script_envs_gtm.png", dpi = 500, height = 8, width = 12, units = "in")
 
