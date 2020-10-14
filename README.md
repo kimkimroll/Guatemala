@@ -8,4 +8,4 @@ R Studio coding for
 ![Sites - terrain](https://raw.githubusercontent.com/kimkimroll/Guatemala_environmental_surveillance/master/guatemalafinal1.png)
 
 
-![ENVS results both methods](https://raw.githubusercontent.com/kimkimroll/Guatemala_environmental_surveillance/master/envs_results_both_methods.jpg)
+![ENVS results both methods](https://raw.githubusercontent.com/kimkimroll/Guatemala_environmental_surveillance/199468c3a84f689bb47f49c176c89fa1c3fbe068/envs_results_both_methods.png)
