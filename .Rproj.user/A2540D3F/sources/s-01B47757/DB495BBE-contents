@@ -1,0 +1,36 @@
+##############################################################################
+#SCRIPT
+#R Studio console GIT integration
+
+#STEP 1: 
+#Install Git for Windows: https://gitforwindows.org/ (PORTABLE VERSION - WINDOWS 64 BIT)
+#sAVE PROGRAM (.EXE) TO NETWORK FOLDER (PMDDL/KIM/R/GIT)
+#Run GIT PROGRAM (.EXE) from NETWORK FOLDER & finish Installation
+
+#File -> New Project -> Create new directory/Existing directory
+
+#OPEN SHELL COMMUNICATION
+
+#>where git
+#>git remote -v
+#>git pull origin master    #pulls master repository
+#COPY Git URL into Global options
+
+#ADDING REPOSITY MANUALLY
+#>git remote add origin https://github.com/kimkimroll/myrepo.git  #use your repository Git url
+
+#STEP2: 
+#Set working directory to local GitHub folder with repository files
+
+#STEP3:
+#Make changes to file in RStudio
+#In Git tab: 
+#Stage changes
+#Commit changes
+#Push (Green arrow) to Git
+
+#FINISHED
+
+#Check GitHub page
+
+########################################################################END

@@ -47,8 +47,8 @@ allg$r_result[allg$r_result == "NA_NA_NA"] <- 'NA'
 allg$r_result[allg$r_result == "NPEV_NA_NA"] <- 'NPEV'
 allg$r_result[allg$r_result == "NPEV_NEV_NA"] <- 'NPEV'
 allg$r_result[allg$r_result == "NEG_NA_NA"] <- 'NEG'
-allg$r_result[grep("SL3 Discordant", allg$r_result)]<- 'VDPV3'
-allg$r_result[grep("SL1 Discordant", allg$r_result)]<- 'VDPV1'
+allg$r_result[grep("SL3 Discordant", allg$r_result)]<- 'SL3 Discordant'
+allg$r_result[grep("SL1 Discordant", allg$r_result)]<- 'SL1 Discordant'
 allg$r_result<-as.character(allg$r_result)  
 allg <- allg[allg$r_result != "NA", ]
 allg$r_result<-as.factor(allg$r_result)  
@@ -56,14 +56,6 @@ allg$r_result<-as.factor(allg$r_result)
 #make collection month and year columns
 allg[, "year"] <- format(allg[,"collection_date"], "%Y")
 allg[, "month"] <- format(allg[,"collection_date"], "%m")
-
-#filter only Filtration and two-phase results
-allg<-(allg[allg$method == "Filtration" | allg$method == "two_phase",])
-
-#filter only SL1 and SL1 Discordant
-sl1 <- (allg[allg$r_result == "SL1" | allg$r_result == "VDPV1",])
-
-sl3 <- (allg[allg$r_result == "SL3" | allg$r_result == "VDPV3",])
 
 #graph
 library(ggplot2)
@@ -76,32 +68,25 @@ resultcolors<-c(" " = "grey",
                 "SL3" = "light blue", 
                 "SL1 & SL3" = "gold",
                 "SL2" = "red",
-                "VDPV1" = "red", 
-                "VDPV3" = "red")
+                "SL1 Discordant" = "red", 
+                "SL3 Discordant" = "red")
 
 methodcolors<-c("Filtration" = "black",
                 "two_phase" = "grey")   
 
-methodsize<-c("Filtration" = "1.5",
-              "two_phase" = "1") 
-methodsize<-as.numeric(methodsize)  
-
 methodlabels<-c("Filtration" = "Filtration",
                 "two_phase" = "Two-Phase")  
 
-result_order <- c('NEG', 'NPEV', 'SL3', 'SL1', 'SL1 & SL3', 'VDPV3', 'VDPV1')
+result_order <- c('NEG', 'NPEV', 'SL3', 'SL1', 'SL1 & SL3', 'SL3 Discordant', 'SL1 Discordant')
 
 kgtml<-ggplot(allg, aes(x=collection_date, y=factor(r_result, level=result_order), group=method, fill=r_result), na.rm=TRUE) +
-  geom_line(aes(x=collection_date, y=factor(r_result, level=result_order), colour=method, size = method), na.rm=TRUE) +
+  geom_line(aes(x=collection_date, y=factor(r_result, level=result_order), colour=method), size=1, na.rm=TRUE) +
   geom_point(shape = 21, size=4.5, color="white", show.legend=FALSE)+
-  geom_point(data = sl1, aes(x = collection_date), shape = 49, size = 2.5, show.legend=FALSE)+
-  geom_point(data = sl3, aes(x = collection_date), shape = 51, size = 2.5, show.legend=FALSE)+
   geom_hline(aes(yintercept="NPEV"), linetype="solid", 
              color = "blue", alpha=0.25, size=0.75)+
   scale_x_date(date_labels = "%b %Y", breaks="1 month", name='Collection Date')+
   scale_y_discrete(name = "Result")+
   scale_colour_manual(name='Method', values = methodcolors, labels = methodlabels) +
-  scale_size_manual(values=methodsize, guide = FALSE)+
   scale_fill_manual(values = resultcolors) +
   theme_bw()+
   theme( 
